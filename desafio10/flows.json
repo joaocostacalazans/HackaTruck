@@ -1,0 +1,270 @@
+[
+    {
+        "id": "5c22f2298c4a6ce2",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "dc0f838640fbb80a",
+        "type": "http in",
+        "z": "5c22f2298c4a6ce2",
+        "name": "",
+        "url": "/postSos",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 1620,
+        "y": 140,
+        "wires": [
+            [
+                "e42207e9a513b735"
+            ]
+        ]
+    },
+    {
+        "id": "03eda86a6dc16b33",
+        "type": "http in",
+        "z": "5c22f2298c4a6ce2",
+        "name": "",
+        "url": "/getSos",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 1610,
+        "y": 240,
+        "wires": [
+            [
+                "746eed79bf38212e"
+            ]
+        ]
+    },
+    {
+        "id": "15a259854fee8029",
+        "type": "http response",
+        "z": "5c22f2298c4a6ce2",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 2110,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "1c0896aa75750296",
+        "type": "http response",
+        "z": "5c22f2298c4a6ce2",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 2330,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "476f83402ea3b7ec",
+        "type": "cloudantplus out",
+        "z": "5c22f2298c4a6ce2",
+        "name": "",
+        "cloudant": "92c9cc39242c9963",
+        "database": "sosapi",
+        "service": "_ext_",
+        "payonly": true,
+        "operation": "insert",
+        "x": 2190,
+        "y": 140,
+        "wires": [
+            [
+                "1c0896aa75750296"
+            ]
+        ]
+    },
+    {
+        "id": "746eed79bf38212e",
+        "type": "cloudantplus in",
+        "z": "5c22f2298c4a6ce2",
+        "name": "",
+        "cloudant": "92c9cc39242c9963",
+        "database": "sosapi",
+        "service": "_ext_",
+        "search": "_all_",
+        "design": "",
+        "index": "",
+        "x": 1870,
+        "y": 240,
+        "wires": [
+            [
+                "15a259854fee8029"
+            ]
+        ]
+    },
+    {
+        "id": "f8ebf691f6bf97cc",
+        "type": "split",
+        "z": "5c22f2298c4a6ce2",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 1930,
+        "y": 80,
+        "wires": [
+            [
+                "476f83402ea3b7ec"
+            ]
+        ]
+    },
+    {
+        "id": "e42207e9a513b735",
+        "type": "switch",
+        "z": "5c22f2298c4a6ce2",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "array",
+                "vt": "array"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1790,
+        "y": 140,
+        "wires": [
+            [
+                "f8ebf691f6bf97cc"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "2e339a0ff72dd680",
+        "type": "cloudantplus out",
+        "z": "5c22f2298c4a6ce2",
+        "name": "",
+        "cloudant": "92c9cc39242c9963",
+        "database": "jcc_database1",
+        "service": "_ext_",
+        "payonly": true,
+        "operation": "insert",
+        "x": 520,
+        "y": 140,
+        "wires": [
+            [
+                "6f5b2553283d6324"
+            ]
+        ]
+    },
+    {
+        "id": "819599e961e3df48",
+        "type": "http in",
+        "z": "5c22f2298c4a6ce2",
+        "name": "",
+        "url": "/jccPost1",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 140,
+        "wires": [
+            [
+                "8edf37a816f55a21"
+            ]
+        ]
+    },
+    {
+        "id": "6f5b2553283d6324",
+        "type": "http response",
+        "z": "5c22f2298c4a6ce2",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 690,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "ee5174bb4dcea95b",
+        "type": "http in",
+        "z": "5c22f2298c4a6ce2",
+        "name": "",
+        "url": "/jccGet1",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 200,
+        "wires": [
+            [
+                "7efb431a0c84c043"
+            ]
+        ]
+    },
+    {
+        "id": "e81df0a2924fd982",
+        "type": "http response",
+        "z": "5c22f2298c4a6ce2",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 690,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "7efb431a0c84c043",
+        "type": "cloudantplus in",
+        "z": "5c22f2298c4a6ce2",
+        "name": "",
+        "cloudant": "92c9cc39242c9963",
+        "database": "jcc_database1",
+        "service": "_ext_",
+        "search": "_all_",
+        "design": "",
+        "index": "",
+        "x": 520,
+        "y": 200,
+        "wires": [
+            [
+                "e81df0a2924fd982"
+            ]
+        ]
+    },
+    {
+        "id": "8edf37a816f55a21",
+        "type": "split",
+        "z": "5c22f2298c4a6ce2",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 350,
+        "y": 140,
+        "wires": [
+            [
+                "2e339a0ff72dd680"
+            ]
+        ]
+    },
+    {
+        "id": "92c9cc39242c9963",
+        "type": "cloudantplus",
+        "host": "https://f1c0dcf9-5075-4061-a1f8-2f4ca596058a-bluemix.cloudantnosqldb.appdomain.cloud",
+        "name": "",
+        "useapikey": true
+    }
+]

@@ -16,23 +16,34 @@ struct ContentView: View {
         NavigationStack {
             
             ScrollView {
-                VStack(spacing: -20) {
+                VStack {
                     ForEach (viewModel.personagens) { personagem in
                         HStack {
                             
-                            AsyncImage(url: URL(string: personagem.image ?? "Imagem não encontrada")) {
-                                result in result.image?
+                            AsyncImage(url: URL(string: personagem.image ?? "Imagem não encontrada")) { image in
+                                image
                                     .resizable()
                                     .scaledToFit()
+                            } placeholder: {
+                                Image(systemName: "photo.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .foregroundColor(.gray)
                             }
                             .frame(width: 120)
-                            .clipShape(Circle())
+                            .clipShape(Rectangle())
+                            .cornerRadius(5)
                             
-                            Text(personagem.name ?? "Nome não encontrado")
-                                .padding(.leading)
-                                .font(.title)
-                                .fontWeight(.bold)
-                            
+                            VStack(alignment: .leading) {
+                                Text(personagem.name ?? "Nome não encontrado")
+                                    .padding(.leading)
+                                    .font(.headline)
+                                    .fontWeight(.bold)
+                                
+                                Text(personagem.actor ?? "Nome não encontrado")
+                                    .padding(.leading)
+                                    .font(.subheadline)
+                            }
                             Spacer()
                         }
                         .padding(.leading)

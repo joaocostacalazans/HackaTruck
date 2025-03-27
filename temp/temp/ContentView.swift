@@ -80,29 +80,31 @@ struct ContentView: View {
                     
                     ScrollView {
                         ForEach(songs) { song in
-                            HStack {
-                                AsyncImage(url: URL(string: song.cover)) { image in
-                                        image
-                                            .resizable()
-                                            .scaledToFit()
-                                            .cornerRadius(5)
-                                    } placeholder: {
-                                        Image(systemName: "photo.fill")
+                            NavigationLink(destination: SongView(song: song)) {
+                                HStack {
+                                    AsyncImage(url: URL(string: song.cover)) { image in
+                                            image
+                                                .resizable()
+                                                .scaledToFit()
+                                                .cornerRadius(5)
+                                        } placeholder: {
+                                            Image(systemName: "photo.fill")
+                                        }
+                                        .frame(width: 50)
+                                        .padding(.leading)
+                                        .padding(.trailing, 5)
+                                    
+                                    VStack(alignment: .leading) {
+                                        Text(song.name)
+                                            .foregroundStyle(.white)
+                                        Text(song.artist)
+                                            .font(.caption)
+                                            .foregroundStyle(.white)
                                     }
-                                    .frame(width: 50)
-                                    .padding(.leading)
-                                    .padding(.trailing, 5)
-                                
-                                VStack(alignment: .leading) {
-                                    Text(song.name)
-                                        .foregroundStyle(.white)
-                                    Text(song.artist)
-                                        .font(.caption)
-                                        .foregroundStyle(.white)
+                                    Spacer()
                                 }
-                                Spacer()
+                                .padding(2)
                             }
-                            .padding(2)
                         }
                         
                         HStack {
@@ -140,6 +142,8 @@ struct ContentView: View {
                 }
             }
         }
+        .tint(.white)
+        //.accentColor(.white)
     }
 }
 
