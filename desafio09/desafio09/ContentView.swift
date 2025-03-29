@@ -38,11 +38,11 @@ struct ContentView: View {
                                 Text(personagem.name ?? "Nome não encontrado")
                                     .padding(.leading)
                                     .font(.headline)
-                                    .fontWeight(.bold)
                                 
                                 Text(personagem.actor ?? "Nome não encontrado")
                                     .padding(.leading)
                                     .font(.subheadline)
+                                    .foregroundColor(.secondary)
                             }
                             Spacer()
                         }
